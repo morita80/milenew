@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import PKHUD
 
 class ViewController: UIViewController,UITextFieldDelegate {
     
@@ -27,6 +28,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
         if let _ = Auth.auth().currentUser {
             self.alreadysignIn()
         }
+        
     
         
         
@@ -69,6 +71,11 @@ class ViewController: UIViewController,UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        HUD.flash(.success, delay: 2.0)
     }
     
     

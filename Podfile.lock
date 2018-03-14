@@ -76,6 +76,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PKHUD (4.2.3)
   - Protobuf (3.5.0)
 
 DEPENDENCIES:
@@ -83,6 +84,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
+  - PKHUD (~> 4.0)
 
 SPEC CHECKSUMS:
   BoringSSL: f3d6b8ce199b9c450a8cfc14895d07a2627fc232
@@ -101,8 +103,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
 
-PODFILE CHECKSUM: 0a1f8102ff851f8e0faae34472afc580c14e1026
+PODFILE CHECKSUM: 87e623a6ae4d79215848a49db3988955e5f53192
 
 COCOAPODS: 1.4.0
