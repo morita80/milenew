@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		21CA7F4A8F120C6956319161 /* Pods_mileshareAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48762C7CA0A4240B9C964F8D /* Pods_mileshareAppUITests.framework */; };
 		23267BD9DD789606C4215710 /* Pods_mileshareAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4FACE33F17FC70FE83194B /* Pods_mileshareAppTests.framework */; };
+		2A33E2C72058E2EF004D238F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33E2C62058E2EF004D238F /* MyPageViewController.swift */; };
 		2A77DA3520510738005CA3F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A77DA3420510738005CA3F3 /* GoogleService-Info.plist */; };
 		2A77DA7320513A09005CA3F3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77DA7220513A09005CA3F3 /* MainViewController.swift */; };
 		2A80C58B2057A318006E2F22 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A80C58A2057A318006E2F22 /* SignUpViewController.swift */; };
@@ -20,6 +21,7 @@
 		2A820CA4204A712600D6BD01 /* WhatMileShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A820CA3204A712600D6BD01 /* WhatMileShare.swift */; };
 		2A820CAF204A712700D6BD01 /* mileshareAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A820CAE204A712700D6BD01 /* mileshareAppUITests.swift */; };
 		2A8F66D9205783D800329412 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8F66D8205783D800329412 /* LoginViewController.swift */; };
+		2AC9B02A2058FB5B005FC16A /* bookingConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9B0292058FB5B005FC16A /* bookingConfirmationViewController.swift */; };
 		B3EE7915C2C41DBA5FC79D33 /* Pods_mileshareApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8578F4A3BA07D7D7DF2CF8D5 /* Pods_mileshareApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,7 @@
 /* Begin PBXFileReference section */
 		0ADEBF1D0C2A9544678FD592 /* Pods-mileshareAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mileshareAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mileshareAppTests/Pods-mileshareAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4FACE33F17FC70FE83194B /* Pods_mileshareAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mileshareAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A33E2C62058E2EF004D238F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		2A77DA3420510738005CA3F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A77DA7220513A09005CA3F3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2A80C58A2057A318006E2F22 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		2A820CAE204A712700D6BD01 /* mileshareAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mileshareAppUITests.swift; sourceTree = "<group>"; };
 		2A820CB0204A712700D6BD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A8F66D8205783D800329412 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2AC9B0292058FB5B005FC16A /* bookingConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookingConfirmationViewController.swift; sourceTree = "<group>"; };
 		36129D82010AC7092F69965E /* Pods-mileshareApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mileshareApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-mileshareApp/Pods-mileshareApp.release.xcconfig"; sourceTree = "<group>"; };
 		48762C7CA0A4240B9C964F8D /* Pods_mileshareAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mileshareAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CBBE8BD87CA994306481BA7 /* Pods-mileshareAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mileshareAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mileshareAppUITests/Pods-mileshareAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,7 +131,9 @@
 				2A8F66D8205783D800329412 /* LoginViewController.swift */,
 				2A820C8E204A712600D6BD01 /* AppDelegate.swift */,
 				2A80C58A2057A318006E2F22 /* SignUpViewController.swift */,
+				2A33E2C62058E2EF004D238F /* MyPageViewController.swift */,
 				2A820C90204A712600D6BD01 /* ViewController.swift */,
+				2AC9B0292058FB5B005FC16A /* bookingConfirmationViewController.swift */,
 				2A820C92204A712600D6BD01 /* Main.storyboard */,
 				2A820C95204A712600D6BD01 /* Assets.xcassets */,
 				2A820C97204A712600D6BD01 /* LaunchScreen.storyboard */,
@@ -490,6 +496,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A8F66D9205783D800329412 /* LoginViewController.swift in Sources */,
+				2AC9B02A2058FB5B005FC16A /* bookingConfirmationViewController.swift in Sources */,
+				2A33E2C72058E2EF004D238F /* MyPageViewController.swift in Sources */,
 				2A820C91204A712600D6BD01 /* ViewController.swift in Sources */,
 				2A820C8F204A712600D6BD01 /* AppDelegate.swift in Sources */,
 				2A77DA7320513A09005CA3F3 /* MainViewController.swift in Sources */,
