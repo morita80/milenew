@@ -83,13 +83,14 @@ class MainViewController: UIViewController,UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    @IBAction func tappedSingOut(_ sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
-            performSegue(withIdentifier: "signOut", sender: nil)
-        } catch let error {
-            assertionFailure("Error signing out: \(error)")
-        }
-    }
+    //ログアウト
+//    @IBAction func tappedSingOut(_ sender: UIButton) {
+//        do {
+//            try Auth.auth().signOut()
+//            performSegue(withIdentifier: "signOut", sender: nil)
+//        } catch let error {
+//            assertionFailure("Error signing out: \(error)")
+//        }
+//    }
     
 }

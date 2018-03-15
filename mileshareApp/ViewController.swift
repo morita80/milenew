@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import PKHUD
+
 
 class ViewController: UIViewController,UITextFieldDelegate {
     
@@ -25,9 +25,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        if let _ = Auth.auth().currentUser {
-            self.alreadysignIn()
-        }
+        
         
     
         
@@ -75,12 +73,16 @@ class ViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        HUD.flash(.success, delay: 2.0)
+//        HUD.flash(.success, delay: 2.0)
+        //ナビゲーションバーを隠す
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        print("test:\(Auth.auth().currentUser)")
+        if let _ = Auth.auth().currentUser {
+            self.alreadysignIn()
+        }
+        
     }
-    
-    
-    
-    
     
     //乗る空港を入れるtextField
     @IBAction func depertuerSarchAction(_ sender: Any) {
@@ -100,6 +102,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
    
 }
     func alreadysignIn() {
+        print("aaaaaaaaaaaa")
         performSegue(withIdentifier: "alreadysignIn", sender: nil)
     }
 }

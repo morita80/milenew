@@ -14,12 +14,28 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var topView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+        topView.isUserInteractionEnabled = true
+        topView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(_:))))
+        self.view.addSubview(topView)
     }
+    
+    // 画像がタップされたら呼ばれる
+    @objc func imageViewTapped(_ sender: UITapGestureRecognizer) {
+        do {
+            try Auth.auth().signOut()
+            performSegue(withIdentifier: "topView", sender: nil)
+        } catch let error {
+            assertionFailure("Error signing out: \(error)")
+        }
+        
+    }
+    
     //キーボード以外をタッチしたらキーボードが閉じる
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
