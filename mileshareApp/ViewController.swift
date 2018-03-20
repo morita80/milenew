@@ -81,8 +81,6 @@ class ViewController: UIViewController,UITextFieldDelegate {
         
     }
     
-    
-    
     //乗る空港を入れるtextField
     @IBAction func depertuerSarchAction(_ sender: Any) {
     }
@@ -97,7 +95,6 @@ class ViewController: UIViewController,UITextFieldDelegate {
         dateSelecter.text = dateFormat.string(from: pickerDate)
         
         self.view.endEditing(true)
-   
    
 }
     //画面をタッチするとキーボード閉じる
