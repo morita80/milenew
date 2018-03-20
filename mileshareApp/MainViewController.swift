@@ -20,7 +20,11 @@ class MainViewController: UIViewController,UITextFieldDelegate {
     
     //カレンダーを出すtextField
     @IBOutlet weak var dateSelecter: UITextField!
-    
+    //乗る空港を入れるtextField
+    @IBOutlet weak var depertuerSarch: UITextField!
+    //降りる空港を入れるtextField
+    @IBOutlet weak var arrivalSarch: UITextField!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,13 +65,19 @@ class MainViewController: UIViewController,UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
 
-    //乗る空港を入れるtextField
-    @IBAction func depertuerSarchAction(_ sender: Any) {
     }
-    //降りる空港を入れるtextField
-    @IBAction func arrivalSarchAction(_ sender: Any) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let SearchResultsViewController = segue.destination as! SearchResultsViewController
+        SearchResultsViewController.datelabel1 = dateSelecter.text
+        SearchResultsViewController.departureLabel1 = depertuerSarch.text
+        SearchResultsViewController.arrivalLabel1 = arrivalSarch.text
+        
     }
+   
     
     //完了を押すとピッカーの値を、テキストフィールドに挿入して、ピッカーを閉じる
     @objc func toolBarBtnPush(sender: UIBarButtonItem){
@@ -79,18 +89,15 @@ class MainViewController: UIViewController,UITextFieldDelegate {
     }
     
     //キーボード以外をタッチしたらキーボードが閉じる
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
-    //ログアウト
-//    @IBAction func tappedSingOut(_ sender: UIButton) {
-//        do {
-//            try Auth.auth().signOut()
-//            performSegue(withIdentifier: "signOut", sender: nil)
-//        } catch let error {
-//            assertionFailure("Error signing out: \(error)")
-//        }
-//    }
+    
+    @IBAction func searchAction(_ sender: UIButton) {
+         performSegue(withIdentifier: "nextSegue", sender: nil)
+        
+    }
+
     
 }

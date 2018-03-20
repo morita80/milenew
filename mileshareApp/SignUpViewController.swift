@@ -76,6 +76,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    //画面をタッチするとキーボード閉じる
+    @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    
     func signIn() {
         performSegue(withIdentifier: "SignInFromSignUp", sender: nil)
     }

@@ -27,9 +27,6 @@ class ViewController: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-    
-        
-        
         //日付フィールドの設定
         dateFormat.dateFormat = "yyyy年MM月dd日"
         dateSelecter.text = dateFormat.string(from: nowDate as Date)
@@ -62,9 +59,9 @@ class ViewController: UIViewController,UITextFieldDelegate {
         dateSelecter.inputAccessoryView = pickerToolBar
     }
     //キーボード以外をタッチしたらキーボードが閉じる
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,6 +81,8 @@ class ViewController: UIViewController,UITextFieldDelegate {
         
     }
     
+    
+    
     //乗る空港を入れるtextField
     @IBAction func depertuerSarchAction(_ sender: Any) {
     }
@@ -101,8 +100,12 @@ class ViewController: UIViewController,UITextFieldDelegate {
    
    
 }
+    //画面をタッチするとキーボード閉じる
+    @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     func alreadysignIn() {
-        print("aaaaaaaaaaaa")
         performSegue(withIdentifier: "alreadysignIn", sender: nil)
     }
+  
 }

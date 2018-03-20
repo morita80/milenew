@@ -115,7 +115,12 @@ override func didReceiveMemoryWarning() {
     prompt.addAction(okAction)
     present(prompt, animated: true, completion: nil)
 }
-
+    //画面をタッチするとキーボード閉じる
+    @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    
 func showAlert(_ message: String) {
     let alertController = UIAlertController(title: "To Do App", message: message, preferredStyle: UIAlertControllerStyle.alert)
     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
