@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import MessageUI
 
-class ConfirmationViewController: UIViewController, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ConfirmationViewController: UIViewController, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, MFMailComposeViewControllerDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -54,12 +57,14 @@ class ConfirmationViewController: UIViewController, UITextViewDelegate, UIPicker
 
     @IBAction func sendEmail(_ sender: UIButton) {
         performSegue(withIdentifier: "sendEmail", sender: nil)
+
     }
+    
     //画面をタッチするとキーボード閉じる
     @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     
-   
+
 }

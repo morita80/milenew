@@ -10,6 +10,7 @@
 		21CA7F4A8F120C6956319161 /* Pods_mileshareAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48762C7CA0A4240B9C964F8D /* Pods_mileshareAppUITests.framework */; };
 		23267BD9DD789606C4215710 /* Pods_mileshareAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4FACE33F17FC70FE83194B /* Pods_mileshareAppTests.framework */; };
 		2A0A32DA2060B85200A6B1A8 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0A32D92060B85200A6B1A8 /* ConfirmationViewController.swift */; };
+		2A0A32DC2060E6AB00A6B1A8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0A32DB2060E6AB00A6B1A8 /* MessageUI.framework */; };
 		2A33E2C72058E2EF004D238F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A33E2C62058E2EF004D238F /* MyPageViewController.swift */; };
 		2A77DA3520510738005CA3F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A77DA3420510738005CA3F3 /* GoogleService-Info.plist */; };
 		2A77DA7320513A09005CA3F3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77DA7220513A09005CA3F3 /* MainViewController.swift */; };
@@ -48,6 +49,7 @@
 		0ADEBF1D0C2A9544678FD592 /* Pods-mileshareAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mileshareAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mileshareAppTests/Pods-mileshareAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4FACE33F17FC70FE83194B /* Pods_mileshareAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mileshareAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0A32D92060B85200A6B1A8 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		2A0A32DB2060E6AB00A6B1A8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2A33E2C62058E2EF004D238F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		2A77DA3420510738005CA3F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A77DA7220513A09005CA3F3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A0A32DC2060E6AB00A6B1A8 /* MessageUI.framework in Frameworks */,
 				B3EE7915C2C41DBA5FC79D33 /* Pods_mileshareApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +185,7 @@
 		E467A56BDC081D4CC7A03ABA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A0A32DB2060E6AB00A6B1A8 /* MessageUI.framework */,
 				8578F4A3BA07D7D7DF2CF8D5 /* Pods_mileshareApp.framework */,
 				1A4FACE33F17FC70FE83194B /* Pods_mileshareAppTests.framework */,
 				48762C7CA0A4240B9C964F8D /* Pods_mileshareAppUITests.framework */,
