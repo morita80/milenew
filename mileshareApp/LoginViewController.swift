@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKCoreKit
+import FBSDKLoginKit
+
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -37,6 +40,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         topView.isUserInteractionEnabled = true
         topView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(_:))))
         self.view.addSubview(topView)
+        
+        let loginButton:FBSDKLoginButton = FBSDKLoginButton()
+        loginButton.center = self.view.center
+        self.view.addSubview(loginButton)
     }
     
     // 画像がタップされたら呼ばれる

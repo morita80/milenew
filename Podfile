@@ -12,8 +12,12 @@ target 'mileshareApp' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'PKHUD','~>4.0'
- 
+  pod 'Firebase/RemoteConfig'
 
+  # Facebook
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
 
 
 
