@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FacebookLogin
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
@@ -23,6 +24,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         topView.isUserInteractionEnabled = true
         topView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(_:))))
         self.view.addSubview(topView)
+        
+        //facebookloginnbutton
+        let loginButton = LoginButton(readPermissions: [ .email ])
+        loginButton.delegate = UIApplication.shared.delegate as! AppDelegate
+        loginButton.frame = CGRect(x: 80, y: 220, width: 215, height: 40)
+        view.addSubview(loginButton)
     }
     
     // 画像がタップされたら呼ばれる

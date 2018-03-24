@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FBSDKCoreKit
 import FBSDKLoginKit
-
+import FacebookLogin
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -21,9 +21,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//                if let _ = Auth.auth().currentUser {
-//                    self.alreadysignIn()
-//                }
     }
     
     
@@ -40,10 +37,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         topView.isUserInteractionEnabled = true
         topView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(_:))))
         self.view.addSubview(topView)
-        
-        let loginButton:FBSDKLoginButton = FBSDKLoginButton()
-        loginButton.center = self.view.center
-        self.view.addSubview(loginButton)
+        //facebookloginnbutton
+        var loginButton = LoginButton(readPermissions: [ .email ])
+        loginButton.delegate = UIApplication.shared.delegate as! AppDelegate
+        loginButton.frame = CGRect(x: 80, y: 220, width: 215, height: 40)
+        view.addSubview(loginButton)
     }
     
     // 画像がタップされたら呼ばれる
@@ -63,6 +61,15 @@ override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
 }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        // ...
+    }
+    
 //ログインボタン
 @IBAction func didTapSignIn(_ sender: UIButton) {
     let email = emailField.text

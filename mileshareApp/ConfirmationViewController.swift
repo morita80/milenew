@@ -54,11 +54,37 @@ class ConfirmationViewController: UIViewController, UITextViewDelegate, UIPicker
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    //メーラ起動　送信画面立ち上げ
     @IBAction func sendEmail(_ sender: UIButton) {
-        performSegue(withIdentifier: "sendEmail", sender: nil)
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["n.morita.test@gmail.com"]) // 宛先アドレス
+            mail.setSubject("お問い合わせ") // 件名
+            mail.setMessageBody("\(datelabel1!),\(departureLabel1!),\(arrivalLabel1!),搭乗人数　\(peopleCountLabel1!),希望時間　\(timeLabel1!),ご利用の目的　\(purposeLabel1!)", isHTML: false)  // 本文,,,,,,,
+                present(mail, animated: true, completion: nil)
+        } else {
+            print("送信できません")
+        }
+        
 
     }
+    //イベント終了後処理
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            print("キャンセル")
+        case .saved:
+            print("下書き保存")
+        case .sent:
+            performSegue(withIdentifier: "sendEmail", sender: nil)
+            print("送信成功")
+        default:
+            print("送信失敗")
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
     
     //画面をタッチするとキーボード閉じる
     @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {

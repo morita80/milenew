@@ -22,6 +22,8 @@ class ViewController: UIViewController,UITextFieldDelegate {
     //カレンダーを出すtextField
     @IBOutlet weak var dateSelecter: UITextField!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
