@@ -38,9 +38,9 @@ class SearchResultsViewController: UIViewController, UITextViewDelegate, UIPicke
         super.viewDidLoad()
         
         //mainViewの航路や日付を表示
-        dateLabel.text = "往路     \(datelabel1!)"
-        departureLabel.text = "ご出発     \(departureLabel1!)"
-        arrivalLabel.text = "ご到着      \(arrivalLabel1!)"
+        dateLabel.text = datelabel1!
+        departureLabel.text = departureLabel1!
+        arrivalLabel.text = arrivalLabel1!
         
         //人数を確定するための設定
         pickerView.delegate = self

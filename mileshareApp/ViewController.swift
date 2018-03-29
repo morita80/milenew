@@ -11,13 +11,24 @@ import Firebase
 import FirebaseAuth
 
 
-class ViewController: UIViewController,UITextFieldDelegate {
+class ViewController: UIViewController,UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 1
+    }
     //変数を宣言する
     //今日の日付を代入
     let nowDate = NSDate()
     let dateFormat = DateFormatter()
     let inputDatePicker = UIDatePicker()
+    var pickerView: UIPickerView = UIPickerView()
+    var pickerView1: UIPickerView = UIPickerView()
+    let departure = ["新千歳", "羽田空港", "成田", "大阪", "伊丹", "6", "7", "8"]
+    let arrival = ["福岡", "那覇"]
+    
     
     //カレンダーを出すtextField
     @IBOutlet weak var dateSelecter: UITextField!
@@ -26,7 +37,67 @@ class ViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       //ピッカー設定
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
+        self.pickerView.showsSelectionIndicator = true
+        self.pickerView.tag = 1
+        
+        pickerView1.delegate = self
+        pickerView1.dataSource = self
+        pickerView1.showsSelectionIndicator = true
+        pickerView1.tag = 2
+        
+        func done() {
+            self.depertuerSarchAction.endEditing(true)
+            self.arrivalSarchAction.endEditing(true)
+            
+        }
+        
+        func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+            return CGRect(x: x, y: y, width: width, height: height)
+        }
+        
+        let toolbar = UIToolbar(frame: CGRectMake(0, 0, 0, 35))
+        let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(SearchResultsViewController.done))
+        
+        toolbar.setItems([doneItem], animated: true)
+        
+        self.depertuerSarchAction.inputView = pickerView1
+        self.depertuerSarchAction.inputAccessoryView = toolbar
+        self.depertuerSarchAction.text = departure[0]
+        
+        self.arrivalSarchAction.inputView = pickerView1
+        self.arrivalSarchAction.inputAccessoryView = toolbar
+        self.arrivalSarchAction.text = arrival[0]
+
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            if pickerView.tag == 1 {     // <<<<<<<<<<　変更
+                return departure.count
+            } else  {
+                return self.arrival.count
+            }
+        }
+        
+        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            if pickerView.tag == 1 {    // <<<<<<<<<<　変更
+                return departure[row]
+            } else {
+                return arrival[row]
+            }
+            
+        }
+        
+        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            if pickerView.tag == 1 {      // <<<<<<<<<<　変更
+                depertuerSarchAction.text = departure[row]
+            } else {
+                arrivalSarchAction.text = arrival[row]
+            }
+        }
+        
+      
+        
         
         
         //日付フィールドの設定
@@ -34,14 +105,14 @@ class ViewController: UIViewController,UITextFieldDelegate {
         dateSelecter.text = dateFormat.string(from: nowDate as Date)
         self.dateSelecter.delegate = self as! UITextFieldDelegate
         
+       
+        
         
         // DatePickerの設定(日付用)
         inputDatePicker.datePickerMode = UIDatePickerMode.date
         dateSelecter.inputView = inputDatePicker
         
-        func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
-            return CGRect(x: x, y: y, width: width, height: height)
-        }
+       
         // キーボードに表示するツールバーの表示
         let pickerToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         pickerToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -59,37 +130,67 @@ class ViewController: UIViewController,UITextFieldDelegate {
         //ツールバーにボタンを表示
         pickerToolBar.items = [spaceBarBtn,toolBarBtn]
         dateSelecter.inputAccessoryView = pickerToolBar
+        
     }
-    //キーボード以外をタッチしたらキーボードが閉じる
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        HUD.flash(.success, delay: 2.0)
+
         //ナビゲーションバーを隠す
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        print("test:\(Auth.auth().currentUser)")
+
         if let _ = Auth.auth().currentUser {
             self.alreadysignIn()
         }
-        
+
+    }
+     //ログインしているユーザーに関する情報を必要とするアプリの各ビューに対して、FIRAuth オブジェクトにリスナーをアタッチ
+    var handle: AuthStateDidChangeListenerHandle?
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // [START auth_listener]
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            // [START_EXCLUDE]
+    
+            // [END_EXCLUDE]
+        }
+        // [END auth_listener]
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // [START remove_auth_listener]
+        Auth.auth().removeStateDidChangeListener(handle!)
+        // [END remove_auth_listener]
     }
     
     //乗る空港を入れるtextField
-    @IBAction func depertuerSarchAction(_ sender: Any) {
-    }
+   
+    @IBOutlet weak var depertuerSarchAction: UITextField!
     //降りる空港を入れるtextField
-    @IBAction func arrivalSarchAction(_ sender: Any) {
-    }
+   
+    @IBOutlet weak var arrivalSarchAction: UITextField!
     
+    @IBOutlet weak var button: UIButton!
+    @IBAction func buttonTapp(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        if depertuerSarchAction.text == "" || arrivalSarchAction.text == ""{
+            
+        } else {
+           performSegue(withIdentifier: "loginView", sender: nil)
+        }
+    }
+        
+    
+    
+   
     //完了を押すとピッカーの値を、テキストフィールドに挿入して、ピッカーを閉じる
     @objc func toolBarBtnPush(sender: UIBarButtonItem){
         

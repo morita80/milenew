@@ -69,7 +69,7 @@ class MainViewController: UIViewController,UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(true, animated: false)
 
     }
-    
+    //テキストの値を次の画面に渡す処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let SearchResultsViewController = segue.destination as! SearchResultsViewController
         SearchResultsViewController.datelabel1 = dateSelecter.text
@@ -95,9 +95,13 @@ class MainViewController: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func searchAction(_ sender: UIButton) {
-         performSegue(withIdentifier: "nextSegue", sender: nil)
-        
+//        dismiss(animated: true, completion: nil)
+//        if dateSelecter.text == "" || depertuerSarch.text == "" || arrivalSarch.text == ""{
+//
+//        } else {
+            performSegue(withIdentifier: "nextSegue", sender: nil)
+//        }
+    
     }
-
     
 }

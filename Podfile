@@ -14,6 +14,10 @@ target 'mileshareApp' do
   pod 'PKHUD','~>4.0'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
+  pod 'FirebaseUI/Storage'
+  pod 'SDWebImage'
+  
 
   # Facebook
   pod 'FBSDKCoreKit'
@@ -34,5 +38,4 @@ target 'mileshareApp' do
     inherit! :search_paths
     # Pods for testing
   end
-
 end

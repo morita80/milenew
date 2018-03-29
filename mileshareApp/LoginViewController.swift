@@ -15,8 +15,16 @@ import FacebookLogin
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var emailField: UITextField!{
+        didSet {
+            emailField.delegate = self // デリゲートをセット
+        }
+    }
+    @IBOutlet weak var passwordField: UITextField!{
+        didSet {
+            passwordField.delegate = self // デリゲートをセット
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -37,6 +45,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         topView.isUserInteractionEnabled = true
         topView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(_:))))
         self.view.addSubview(topView)
+       
+        
         //facebookloginnbutton
         var loginButton = LoginButton(readPermissions: [ .email ])
         loginButton.delegate = UIApplication.shared.delegate as! AppDelegate
@@ -88,13 +98,20 @@ override func didReceiveMemoryWarning() {
                     }
                 }
                 
-                assertionFailure("user and error are nil")
+//    assertionFailure("user and error are nil")
+                self.dismiss(animated: true, completion: nil)
+                if self.emailField.text == "" || self.passwordField.text == ""{
+
+                } else {
+                    self.performSegue(withIdentifier: "SignInFromLogin", sender: nil)
+                }
             }
             return
         }
         self.signIn()
     })
-}
+   }
+
 //パスワード再発行
 @IBAction func didRequestPasswordReset(_ sender: UIButton) {
     let prompt = UIAlertController(title: "To Do App", message: "Email:", preferredStyle: .alert)
@@ -129,6 +146,75 @@ override func didReceiveMemoryWarning() {
     prompt.addAction(okAction)
     present(prompt, animated: true, completion: nil)
 }
+    
+    //ログインしているユーザーに関する情報を必要とするアプリの各ビューに対して、FIRAuth オブジェクトにリスナーをアタッチ
+    var handle: AuthStateDidChangeListenerHandle?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureObserver()
+        // [START auth_listener]
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            // [START_EXCLUDE]
+            
+            // [END_EXCLUDE]
+        }
+        // [END auth_listener]
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.removeObserver() // Notificationを画面が消えるときに削除
+        // [START remove_auth_listener]
+        Auth.auth().removeStateDidChangeListener(handle!)
+        // [END remove_auth_listener]
+    }
+    
+    // Notificationを設定
+    func configureObserver() {
+        
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    // Notificationを削除
+    func removeObserver() {
+        
+        let notification = NotificationCenter.default
+        notification.removeObserver(self)
+    }
+    
+    // キーボードが現れた時に、画面全体をずらす。
+    @objc func keyboardWillShow(notification: Notification?) {
+        
+        let rect = (notification?.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+        let duration: TimeInterval? = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
+        UIView.animate(withDuration: duration!, animations: { () in
+            let transform = CGAffineTransform(translationX: 0, y: -(rect?.size.height)!)
+            self.view.transform = transform
+            
+        })
+    }
+    
+    // キーボードが消えたときに、画面を戻す
+    @objc func keyboardWillHide(notification: Notification?) {
+        
+        let duration: TimeInterval? = notification?.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? Double
+        UIView.animate(withDuration: duration!, animations: { () in
+            
+            self.view.transform = CGAffineTransform.identity
+        })
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder() // Returnキーを押したときにキーボードを下げる
+        return true
+    }
+    
+   
+    
     //画面をタッチするとキーボード閉じる
     @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)

@@ -13,10 +13,14 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import FacebookCore
 import FacebookLogin
+import FirebaseMessaging
+import UserNotifications
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, LoginButtonDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginButtonDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+    
+    let gcmMessageIDKey = "gcm.message_id"
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         switch result {
@@ -59,6 +63,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginButtonDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        let db = Firestore.firestore()
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        
+        // UNUserNotificationCenterDelegateの設定
+        UNUserNotificationCenter.current().delegate = self as! UNUserNotificationCenterDelegate
+        // FCMのMessagingDelegateの設定
+        Messaging.messaging().delegate = self as! MessagingDelegate
+        
+        // リモートプッシュの設定
+        application.registerForRemoteNotifications()
+
+        
+        // アプリ起動時にFCMのトークンを取得し、表示する
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
+
+        
+        
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions as? [UIApplicationLaunchOptionsKey : Any])
         // 4. application:openUrl:options:を追加
         @available(iOS 9.0, *)
@@ -73,6 +99,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginButtonDelegate {
         return true
     }
 
+    // 省略
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("フロントでプッシュ通知受け取ったよ")
+    }
+    
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -102,6 +140,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginButtonDelegate {
         return handled
     }
 
+   
+    
 
 }
 
